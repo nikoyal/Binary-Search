@@ -32,7 +32,10 @@ namespace Binary_Search
                         }
                     }
                 }
-                else index = mid;
+                else 
+                { 
+                    index = mid;
+                }
                 if(lastindex == mid)
                 {
                    return "Number not found in array";
