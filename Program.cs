@@ -5,18 +5,9 @@ namespace Binary_Search
 {
     class Program
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Input sorted array split numbers by spacebar");
-            int[] array = Console.ReadLine().Split().Select(x => int.Parse(x)).ToArray();
-            Console.WriteLine("Input number to binary search for in array");
-            int numberToLookFor = int.Parse(Console.ReadLine());
-            Console.WriteLine(BinarySearch(array,numberToLookFor));
-            string end = Console.ReadLine();
-        }
         public static string BinarySearch(int[] array, int number)
         {
-            int currentindex = 0;
+            int lastindex = -1;
             int index = -1;
             int mid = (array.Length - 1) / 2;
             int left = 0;
@@ -25,11 +16,11 @@ namespace Binary_Search
             {
                 if (number != array[mid])
                 {
+                    lastindex = mid;
                     if (number < array[mid])
                     {
                         right = mid;
                         mid = (right + left) / 2;
-                        currentindex = mid;
                     }
                     else if (number > array[mid])
                     {
@@ -39,15 +30,18 @@ namespace Binary_Search
                         {
                             mid += 1;
                         }
-                        currentindex = mid;
                     }
                 }
                 else
                 {
-                    index = currentindex;
+                    index = mid;
+                }
+                if(lastindex == mid)
+                {
+                   return "Number not found in array";
                 }
             }
-            return $"The Number is at index [{index}]";
+            return $"The Number is at index [{mid}]";
         }
     }
 }
